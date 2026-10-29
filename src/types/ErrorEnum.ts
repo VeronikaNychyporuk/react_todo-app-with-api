@@ -1,7 +1,7 @@
 export enum ErrorEnum {
-  'loadTodo' = 'loadTodo',
-  'emptyTitle' = 'emptyTitle',
-  'addTodo' = 'addTodo',
-  'deleteTodo' = 'deleteTodo',
-  'updateTodo' = 'updateTodo',
+  'loadTodo' = 'Unable to load todos',
+  'emptyTitle' = 'Title should not be empty',
+  'addTodo' = 'Unable to add a todo',
+  'deleteTodo' = 'Unable to delete a todo',
+  'updateTodo' = 'Unable to update a todo',
 }

@@ -14,12 +14,28 @@ import { Todo } from './types/Todo';
 import { TodoList } from './components/TodoList';
 import classNames from 'classnames';
 import { TodoItem } from './components/TodoItem';
+import { Filter } from './types/Filter';
 
-const enum Filter {
-  'all' = 'all',
-  'active' = 'active',
-  'completed' = 'completed',
-}
+const filterOptions: {
+  value: Filter;
+  label: string;
+  href: string;
+  dataCy: string;
+}[] = [
+  { value: Filter.all, label: 'All', href: '#/', dataCy: 'FilterLinkAll' },
+  {
+    value: Filter.active,
+    label: 'Active',
+    href: '#/active',
+    dataCy: 'FilterLinkActive',
+  },
+  {
+    value: Filter.completed,
+    label: 'Completed',
+    href: '#/completed',
+    dataCy: 'FilterLinkCompleted',
+  },
+];
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -284,38 +300,19 @@ export const App: React.FC = () => {
             </span>
 
             <nav className="filter" data-cy="Filter">
-              <a
-                href="#/"
-                className={classNames('filter__link', {
-                  selected: filter === Filter.all,
-                })}
-                data-cy="FilterLinkAll"
-                onClick={() => setFilter(Filter.all)}
-              >
-                All
-              </a>
-
-              <a
-                href="#/active"
-                className={classNames('filter__link', {
-                  selected: filter === Filter.active,
-                })}
-                data-cy="FilterLinkActive"
-                onClick={() => setFilter(Filter.active)}
-              >
-                Active
-              </a>
-
-              <a
-                href="#/completed"
-                className={classNames('filter__link', {
-                  selected: filter === Filter.completed,
-                })}
-                data-cy="FilterLinkCompleted"
-                onClick={() => setFilter(Filter.completed)}
-              >
-                Completed
-              </a>
+              {filterOptions.map(option => (
+                <a
+                  href={option.href}
+                  className={classNames('filter__link', {
+                    selected: filter === option.value,
+                  })}
+                  data-cy={option.dataCy}
+                  onClick={() => setFilter(option.value)}
+                  key={option.value}
+                >
+                  {option.label}
+                </a>
+              ))}
             </nav>
 
             <button

@@ -27,24 +27,7 @@ export const ErrorNotification = ({ error, onDismiss }: Props) => {
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [error]);
-
-  const getErrorText = () => {
-    switch (error) {
-      case 'loadTodo':
-        return 'Unable to load todos';
-      case 'emptyTitle':
-        return 'Title should not be empty';
-      case 'addTodo':
-        return 'Unable to add a todo';
-      case 'deleteTodo':
-        return 'Unable to delete a todo';
-      case 'updateTodo':
-        return 'Unable to update a todo';
-      default:
-        return '';
-    }
-  };
+  }, [error, onDismiss]);
 
   const handleErrorClose = () => {
     setShowError(false);
@@ -68,7 +51,7 @@ export const ErrorNotification = ({ error, onDismiss }: Props) => {
         className="delete"
         onClick={handleErrorClose}
       />
-      {getErrorText()}
+      {error}
     </div>
   );
 };
